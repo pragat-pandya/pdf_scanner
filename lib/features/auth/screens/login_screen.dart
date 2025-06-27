@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pdf_scanner/core/common/widgets.dart';
 import 'package:pdf_scanner/core/constants/constants.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -46,6 +47,7 @@ class LoginScreen extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
+          const SignInButton(),
         ],
       ),
     );
