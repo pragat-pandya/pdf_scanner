@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'PDF Scanner',
-      debugShowCheckedModeBanner: true,
+      debugShowCheckedModeBanner: false,
       theme: Pallete.darkModeAppTheme,
       home: const LoginScreen(),
     );
