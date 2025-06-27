@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pdf_scanner/features/auth/screens/login_screen.dart';
 import 'package:pdf_scanner/theme/pallet.dart';
 
 void main() {
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       title: 'PDF Scanner',
       debugShowCheckedModeBanner: true,
       theme: Pallete.darkModeAppTheme,
-      home: const SizedBox(),
+      home: const LoginScreen(),
     );
   }
 }
