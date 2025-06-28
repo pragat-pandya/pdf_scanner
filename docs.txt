@@ -15,8 +15,9 @@ SETTING JAVA HOME IN gradle.properties
 
 
 
-
-
+CLEAN UP PREVIOUS GRADLE BUILDs AND CHACHES
+    -cd android
+    -./gradlew clean
 
 ANDROID KNOWN ISSUES
     -Note: Some input files use or override a deprecated API.
