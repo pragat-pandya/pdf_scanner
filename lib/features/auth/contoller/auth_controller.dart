@@ -4,7 +4,11 @@ import 'package:pdf_scanner/core/utils/ui_utils.dart';
 import 'package:pdf_scanner/features/auth/auth_providers.dart';
 import 'package:pdf_scanner/features/auth/repository/auth_repository.dart';
 
-class AuthController {
+// EXTENDING A StateNotifier
+// This allows us to manage state and notify listeners when the state changes.
+// In this case, we are extending it with a boolean state to indicate loading status.
+
+class AuthController extends StateNotifier<bool> {
   /// A controller for handling authentication operations.
   /// It uses an instance of [AuthRepository] to perform sign-in operations.
   /// This controller can be used in a Flutter application to manage user authentication.
@@ -13,7 +17,8 @@ class AuthController {
 
   AuthController({required AuthRepository authRepository, required Ref ref})
       : _authRepository = authRepository,
-        _ref = ref;
+        _ref = ref,
+        super(false);
 
   void signInWithGoogle(BuildContext context) async {
     final user = await _authRepository.signInWithGoogle();
