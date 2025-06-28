@@ -8,8 +8,8 @@ class AppLogger {
   final Talker talker = TalkerFlutter.init(
     settings: TalkerSettings(
       colors: {
-        'debug': AnsiPen()..blue(),
-        'info': AnsiPen()..green(),
+        'debug': AnsiPen()..gray(),
+        'info': AnsiPen()..blue(),
         'warning': AnsiPen()..yellow(),
         'error': AnsiPen()..red(),
       },
