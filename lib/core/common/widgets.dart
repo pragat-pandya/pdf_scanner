@@ -7,9 +7,9 @@ import 'package:pdf_scanner/theme/pallet.dart';
 class SignInButton extends ConsumerWidget {
   const SignInButton({super.key});
 
-  void signInWithGoogle(WidgetRef ref) {
+  void signInWithGoogle(WidgetRef ref, BuildContext context) {
     // Implement Google Sign-In logic here
-    ref.read(authControllerProvider).signInWithGoogle();
+    ref.read(authControllerProvider).signInWithGoogle(context);
   }
 
   @override
@@ -21,7 +21,7 @@ class SignInButton extends ConsumerWidget {
           Constants.googlePath,
           height: 24,
         ),
-        onPressed: () => signInWithGoogle(ref),
+        onPressed: () => signInWithGoogle(ref, context),
         label: const Text(
           'Sign in with Google',
           style: TextStyle(fontSize: 18),
