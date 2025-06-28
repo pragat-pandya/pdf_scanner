@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pdf_scanner/core/constants/constants.dart';
+import 'package:pdf_scanner/features/auth/auth_providers.dart';
 import 'package:pdf_scanner/theme/pallet.dart';
 
-class SignInButton extends StatelessWidget {
+class SignInButton extends ConsumerWidget {
   const SignInButton({super.key});
 
+  void signInWithGoogle(WidgetRef ref) {
+    // Implement Google Sign-In logic here
+    ref.read(authControllerProvider).signInWithGoogle();
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.all(18.0),
       child: ElevatedButton.icon(
@@ -14,7 +21,7 @@ class SignInButton extends StatelessWidget {
           Constants.googlePath,
           height: 24,
         ),
-        onPressed: () {},
+        onPressed: () => signInWithGoogle(ref),
         label: const Text(
           'Sign in with Google',
           style: TextStyle(fontSize: 18),
