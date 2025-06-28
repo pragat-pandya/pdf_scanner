@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:pdf_scanner/core/constants/constants.dart';
+import 'package:pdf_scanner/core/logs/app_logger.dart';
+import 'package:pdf_scanner/models/user_model.dart';
 
 class AuthRepository {
   /// A repository for handling authentication operations.
@@ -30,9 +33,23 @@ class AuthRepository {
       UserCredential userCredential =
           await _auth.signInWithCredential(credential);
 
-      print("User signed in: ${userCredential.user?.email}");
+      AppLogger().success(
+        "User signed in: ${userCredential.user?.email}",
+      );
+      // print("User signed in: ${userCredential.user?.email}");
+      // UserModel userModel = UserModel(
+      //   name: userCredential.user?.displayName ?? '',
+      //   email: userCredential.user?.email ?? '',
+      //   profilePic: userCredential.user?.photoURL ?? Constants.avatarDefault,
+      //   banner: Constants.bannerDefault,
+      //   uid: userCredential.user?.uid ?? '',
+      //   isAuthenticated: true,
+      //   isPremium: false,
+      //   coins: 0,
+      //   awards: [],
+      // );
     } catch (E) {
-      print("Error signing in with Google: $E");
+      AppLogger().error("Error signing in with Google: $E");
     }
   }
 }
