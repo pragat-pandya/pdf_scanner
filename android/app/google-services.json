@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "600034946788",
+    "project_id": "pdf-scanner-85841",
+    "storage_bucket": "pdf-scanner-85841.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:600034946788:android:aea07d05cb421893a686f1",
+        "android_client_info": {
+          "package_name": "com.example.pdf_scanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJM5G7I6K5dTk5oOld0BEEEiH_eDjCRUA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
