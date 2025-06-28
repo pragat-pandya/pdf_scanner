@@ -18,10 +18,11 @@ final authRepositoryProvider = Provider((ref) => AuthRepository(
 
 /// Controller for handling authentication operations.
 /// It uses the [AuthRepository] to perform sign-in operations.
-final authControllerProvider = Provider((ref) => AuthController(
-      authRepository: ref.watch(authRepositoryProvider),
-      ref: ref,
-    ));
+final authControllerProvider =
+    StateNotifierProvider<AuthController, bool>((ref) => AuthController(
+          authRepository: ref.watch(authRepositoryProvider),
+          ref: ref,
+        ));
 
 
 
