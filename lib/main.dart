@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:pdf_scanner/features/auth/screens/login_screen.dart';
 import 'package:pdf_scanner/theme/pallet.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
+  // Ensure that plugin services are initialized before using Firebase
+  WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Firebase with the default options for the current platform
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
