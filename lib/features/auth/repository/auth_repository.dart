@@ -20,6 +20,9 @@ class AuthRepository {
         _auth = auth,
         _googleSignIn = googleSignIn;
 
+  CollectionReference get _users =>
+      _firestore.collection(FirebaseConstants.usersCollection);
+
   void signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
@@ -36,18 +39,38 @@ class AuthRepository {
       AppLogger().success(
         "User signed in: ${userCredential.user?.email}",
       );
-      // print("User signed in: ${userCredential.user?.email}");
-      // UserModel userModel = UserModel(
-      //   name: userCredential.user?.displayName ?? '',
-      //   email: userCredential.user?.email ?? '',
-      //   profilePic: userCredential.user?.photoURL ?? Constants.avatarDefault,
-      //   banner: Constants.bannerDefault,
-      //   uid: userCredential.user?.uid ?? '',
-      //   isAuthenticated: true,
-      //   isPremium: false,
-      //   coins: 0,
-      //   awards: [],
-      // );
+
+      UserModel userModel;
+
+      if (userCredential.additionalUserInfo!.isNewUser) {
+        AppLogger().info("New user created: ${userCredential.user?.email}");
+        userModel = UserModel(
+          name: userCredential.user?.displayName ?? '',
+          email: userCredential.user?.email ?? '',
+          profilePic: userCredential.user?.photoURL ?? Constants.avatarDefault,
+          banner: Constants.bannerDefault,
+          uid: userCredential.user!.uid,
+          isAuthenticated: true,
+          isPremium: false,
+          coins: 0,
+          awards: [],
+        );
+
+        await _users
+            .doc(userCredential.user!.uid)
+            .set(
+              userModel.toMap(),
+              SetOptions(merge: true),
+            )
+            .then((_) {
+          AppLogger().success("User data saved successfully.");
+        }).catchError((error) {
+          AppLogger().error("Error saving user data: $error");
+        });
+      } else {
+        AppLogger()
+            .info("Existing user signed in: ${userCredential.user?.email}");
+      }
     } catch (E) {
       AppLogger().error("Error signing in with Google: $E");
     }
