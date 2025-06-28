@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:pdf_scanner/core/constants/constants.dart';
+import 'package:pdf_scanner/core/failure.dart';
 import 'package:pdf_scanner/core/logs/app_logger.dart';
+import 'package:pdf_scanner/core/type_defs.dart';
 import 'package:pdf_scanner/models/user_model.dart';
 
 class AuthRepository {
@@ -23,7 +26,28 @@ class AuthRepository {
   CollectionReference get _users =>
       _firestore.collection(FirebaseConstants.usersCollection);
 
-  void signInWithGoogle() async {
+  Stream<UserModel> getUserData(String uid) {
+    return _users.doc(uid).snapshots().map((snapshot) {
+      if (snapshot.exists) {
+        return UserModel.fromMap(snapshot.data() as Map<String, dynamic>);
+      } else {
+        AppLogger().error("User document does not exist for UID: $uid");
+        return UserModel(
+          name: 'Guest',
+          email: '',
+          profilePic: Constants.avatarDefault,
+          banner: Constants.bannerDefault,
+          uid: uid,
+          isAuthenticated: false,
+          isPremium: false,
+          coins: 0,
+          awards: [],
+        );
+      }
+    });
+  }
+
+  FutureEither<UserModel> signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
       final googleAuth = await googleUser?.authentication;
@@ -68,11 +92,19 @@ class AuthRepository {
           AppLogger().error("Error saving user data: $error");
         });
       } else {
+        userModel = await getUserData(userCredential.user!.uid).first;
         AppLogger()
-            .info("Existing user signed in: ${userCredential.user?.email}");
+            .info("Existing user signed in: ${userCredential.user!.email}");
       }
+      return right(userModel);
+    } on FirebaseException catch (e) {
+      AppLogger().error("Firebase Exception: $e");
+      throw e.message!;
     } catch (E) {
       AppLogger().error("Error signing in with Google: $E");
+      return left(
+        Failure("Error signing in with Google: ${E.toString()}"),
+      );
     }
   }
 }
