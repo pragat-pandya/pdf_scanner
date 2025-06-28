@@ -1,5 +1,6 @@
 TO GENERATE SH1 KEY to download google-service.json
     -keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
+    -keytool -list -v -keystore ~/.android/debug.keystore -alias androiddebugkey -storepass android -keypass android
     - replace the google-service.json in android/app/google-service.json
 
 TO CHECK THE JAVA SDK ASSOCIATED WITH ANDROID-STUDIO 
@@ -7,3 +8,16 @@ TO CHECK THE JAVA SDK ASSOCIATED WITH ANDROID-STUDIO
 
 SETTING JAVA HOME IN gradle.properties
     -distributionUrl=https\://services.gradle.org/distributions/gradle-8.2.1-bin.zip
+
+
+
+
+
+
+
+
+
+
+ANDROID KNOWN ISSUES
+    -Note: Some input files use or override a deprecated API.
+        Note: Recompile with -Xlint:deprecation for details.

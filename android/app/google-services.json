@@ -12,7 +12,20 @@
           "package_name": "com.example.pdf_scanner"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "600034946788-0ieknrn6mep5sl5oomv4pnkqn9calnmr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.pdf_scanner",
+            "certificate_hash": "eabce11ec860ffed8a01b01e7fbd2b18e49114b2"
+          }
+        },
+        {
+          "client_id": "600034946788-207eccqo8stkh8jps5sb6up9i5l1u81q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBJM5G7I6K5dTk5oOld0BEEEiH_eDjCRUA"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "600034946788-207eccqo8stkh8jps5sb6up9i5l1u81q.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "600034946788-ltnm00uv80q59gpfa63upatnmd1omi1r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.pdfScanner"
+              }
+            }
+          ]
         }
       }
     }
