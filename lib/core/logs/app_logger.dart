@@ -40,6 +40,7 @@ class AppLogger {
   }
 
   void handleError(Object error, StackTrace stackTrace) {
+    talker.error('Uncaught error: $error', error, stackTrace);
     talker.handle(error, stackTrace);
   }
 }

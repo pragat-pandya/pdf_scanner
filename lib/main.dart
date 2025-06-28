@@ -8,23 +8,23 @@ import 'package:pdf_scanner/theme/pallet.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
-void main() async {
-  // Ensure that plugin services are initialized before using Firebase
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
+  runZonedGuarded(() async {
+    // Ensure that plugin services are initialized before using Firebase
+    WidgetsFlutterBinding.ensureInitialized();
 
-  // Initiate the logging system
-  FlutterError.onError = (details) {
-    AppLogger().handleFlutterError(details);
-  };
+    // Set up Flutter error handler
+    FlutterError.onError = (details) {
+      AppLogger().handleFlutterError(details);
+    };
 
-  // Initialize Firebase with the default options for the current platform
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+    // Initialize Firebase
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  AppLogger().info('Firebase initialized successfully');
+    AppLogger().info('Firebase initialized successfully');
 
-  runZonedGuarded(() {
     runApp(
       const ProviderScope(
         child: MyApp(),
