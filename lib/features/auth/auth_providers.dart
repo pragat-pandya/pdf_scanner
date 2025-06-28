@@ -17,3 +17,16 @@ final authRepositoryProvider = Provider((ref) => AuthRepository(
 /// It uses the [AuthRepository] to perform sign-in operations.
 final authControllerProvider = Provider(
     (ref) => AuthController(authRepository: ref.watch(authRepositoryProvider)));
+
+
+
+//**
+//  REF.READ / REF.WRITE is equivqlent here because we are using them inside a read-only provider.
+//  This means that the provider is read-only and does not allow writing to it.
+
+//  If you need to write to the provider, you should use a StateNotifier or a StateProvider
+//  that allows for state management and updates.
+
+// ALWAYS STICK TO REF.READ whenever outside the BuildContext.
+//
+// */
