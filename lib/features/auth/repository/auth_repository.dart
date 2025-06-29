@@ -60,9 +60,8 @@ class AuthRepository {
       UserCredential userCredential =
           await _auth.signInWithCredential(credential);
 
-      AppLogger().success(
-        "User signed in: ${userCredential.user?.email}",
-      );
+      AppLogger()
+          .info("User Credentials Obtained for ${userCredential.user?.email}");
 
       UserModel userModel;
 
@@ -84,7 +83,6 @@ class AuthRepository {
             .doc(userCredential.user!.uid)
             .set(
               userModel.toMap(),
-              SetOptions(merge: true),
             )
             .then((_) {
           AppLogger().success("User data saved successfully.");
@@ -103,7 +101,10 @@ class AuthRepository {
     } catch (E) {
       AppLogger().error("Error signing in with Google: $E");
       return left(
-        Failure("Error signing in with Google: ${E.toString()}"),
+        Failure(
+          "Error signing in with Google: ${E.toString()}",
+          stackTrace: StackTrace.current,
+        ),
       );
     }
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pdf_scanner/core/logs/app_logger.dart';
 import 'package:pdf_scanner/core/utils/ui_utils.dart';
 import 'package:pdf_scanner/features/auth/auth_providers.dart';
 import 'package:pdf_scanner/features/auth/repository/auth_repository.dart';
@@ -21,12 +22,27 @@ class AuthController extends StateNotifier<bool> {
         super(false);
 
   void signInWithGoogle(BuildContext context) async {
+    state = true; // Set loading state to true
     final user = await _authRepository.signInWithGoogle();
-
+    state = false; // Set loading state to false after operation
     user.fold(
-      (l) => showSnackbar(context: context, message: l.message),
-      (userModel) =>
-          _ref.read(userProvider.notifier).update((state) => userModel),
+      (l) {
+        showSnackbar(
+          context: context,
+          message: l.message,
+        );
+        AppLogger().error(
+          "Error signing in with Google: ${l.stackTrace?.toString() ?? l.message}",
+        );
+        _ref.read(userProvider.notifier).update((state) => null);
+        return;
+      },
+      (userModel) {
+        AppLogger().success(
+          "User signed in: ${userModel.email}",
+        );
+        _ref.read(userProvider.notifier).update((state) => userModel);
+      },
     );
   }
 }

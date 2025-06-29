@@ -73,9 +73,7 @@ class UserModel {
       isAuthenticated: map['isAuthenticated'] as bool,
       isPremium: map['isPremium'] as bool,
       coins: map['coins'] as int,
-      awards: List<String>.from(
-        (map['awards'] as List<String>),
-      ),
+      awards: List<String>.from(map['awards']),
     );
   }
 
