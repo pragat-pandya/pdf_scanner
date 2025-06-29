@@ -1,6 +1,7 @@
 // LOGGED OUT ROUTES
 
 import 'package:flutter/material.dart';
+import 'package:pdf_scanner/features/auth/home/screens/home_screen.dart';
 import 'package:pdf_scanner/features/auth/screens/login_screen.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -18,7 +19,7 @@ final loggedOutRoutes = RouteMap(
 // LOGGED IN ROUTES
 final loggedInRoutes = RouteMap(
   routes: {
-    '/': (_) => const MaterialPage(child: LoginScreen()),
+    '/': (_) => const MaterialPage(child: HomeScreen()),
     // '/home': (_) => const MaterialPage(child: HomeScreen()),
     // '/profile': (_) => const MaterialPage(child: ProfileScreen()),
     // '/settings': (_) => const MaterialPage(child: SettingsScreen()),

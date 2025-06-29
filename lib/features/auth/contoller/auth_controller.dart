@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pdf_scanner/core/logs/app_logger.dart';
 import 'package:pdf_scanner/core/utils/ui_utils.dart';
 import 'package:pdf_scanner/features/auth/auth_providers.dart';
 import 'package:pdf_scanner/features/auth/repository/auth_repository.dart';
+import 'package:pdf_scanner/models/user_model.dart';
 
 // EXTENDING A StateNotifier
 // This allows us to manage state and notify listeners when the state changes.
@@ -20,6 +22,12 @@ class AuthController extends StateNotifier<bool> {
       : _authRepository = authRepository,
         _ref = ref,
         super(false);
+
+  Stream<User?> get authStateChange => _authRepository.authStateChange;
+
+  Stream<UserModel> getUserData(String uid) {
+    return _authRepository.getUserData(uid);
+  }
 
   void signInWithGoogle(BuildContext context) async {
     state = true; // Set loading state to true

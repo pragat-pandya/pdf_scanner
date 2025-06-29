@@ -26,6 +26,8 @@ class AuthRepository {
   CollectionReference get _users =>
       _firestore.collection(FirebaseConstants.usersCollection);
 
+  Stream<User?> get authStateChange => _auth.authStateChanges();
+
   Stream<UserModel> getUserData(String uid) {
     return _users.doc(uid).snapshots().map((snapshot) {
       if (snapshot.exists) {
