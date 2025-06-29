@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pdf_scanner/core/logs/app_logger.dart';
 import 'package:pdf_scanner/features/auth/screens/login_screen.dart';
+import 'package:pdf_scanner/router.dart';
 import 'package:pdf_scanner/theme/pallet.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:routemaster/routemaster.dart';
 import 'firebase_options.dart';
 
 void main() {
@@ -41,11 +43,13 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'PDF Scanner',
       debugShowCheckedModeBanner: false,
       theme: Pallete.darkModeAppTheme,
-      home: const LoginScreen(),
+      routerDelegate:
+          RoutemasterDelegate(routesBuilder: (context) => loggedOutRoutes),
+      routeInformationParser: const RoutemasterParser(),
     );
   }
 }
